@@ -63,7 +63,7 @@ The ERD shows 3 different tables available for analysis: the data table `sales` 
 
 ## SQL Concepts
 
-This case focuses on the follwoing SQL concepts:
+This case focuses on the following SQL concepts:
 - Common Table Expressions
 - Group By Aggregates
 - Window Functions for ranking
