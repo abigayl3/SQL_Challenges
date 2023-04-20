@@ -76,11 +76,11 @@ SELECT customer_id, count(DISTINCT order_date) AS total_visits
 FROM sales s 
 GROUP BY customer_id;
 
-ustomer_id|total_visits|
+customer_id|total_visits|
 ----------+------------+
-          |           4|
-          |           6|
-          |           2|
+A          |           4|
+B          |           6|
+C          |           2|
 
 
 -- 3. What was the first item from the menu purchased by each customer?
