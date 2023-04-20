@@ -70,5 +70,5 @@ This case focuses on the following SQL concepts:
 - Joins
 
 <p> 
-  <a href="https://github.com/abigayl3/SQL_Challenges/blob/main/Case%20Study%20%231%20Danny's%20Diner/Case_Solution.md"> Click here for my solutions to the case study questions</a>
+  <a href="https://github.com/abigayl3/SQL_Challenges/blob/main/Case%20Study%20%231%20Danny's%20Diner/Case_Solutions.md"> Click here for my solutions to the case study questions</a>
 </p>
