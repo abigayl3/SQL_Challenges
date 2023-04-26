@@ -63,12 +63,6 @@ VALUES
  FROM sales s
  JOIN menu m ON s.product_id = m.product_id
  GROUP BY s.customer_id;
-
-customer_id|total_amount_spent|
------------+------------------+
-A          |                76|
-B          |                74|
-C          |                36|
   
 -- 2. How many days has each customer visited the restaurant?
 
@@ -76,15 +70,7 @@ SELECT customer_id, count(DISTINCT order_date) AS total_visits
 FROM sales s 
 GROUP BY customer_id;
 
-customer_id|total_visits|
-----------+------------+
-A          |           4|
-B          |           6|
-C          |           2|
-
-
 -- 3. What was the first item from the menu purchased by each customer?
-
 
 WITH rnk as(
 SELECT m.product_name, 
@@ -99,13 +85,6 @@ SELECT customer_id, product_name
 FROM rnk
 WHERE rnk = 1;
 
-customer_id|product_name|
------------+------------+
-A          |sushi       |
-A          |curry       |
-B          |curry       |
-C          |ramen       |
-
 
 -- 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 
@@ -115,12 +94,6 @@ JOIN sales s ON m.product_id = s.product_id
 GROUP BY product_name
 ORDER BY quantity DESC;
 
-product_name|quantity|
-------------+--------+
-ramen       |       8|
-curry       |       4|
-sushi       |       3|
--- ramen was the most purchased item 
 
 -- 5. Which item was the most popular for each customer?
 
@@ -134,17 +107,9 @@ WITH item AS (
 	GROUP BY s.customer_id, m.product_name 
 )
 
-SELECT product_name, customer_id, quantity, rnk
+SELECT customer_id, product_name,  quantity, rnk
 FROM item
 WHERE rnk = 1;
-
-product_name|customer_id|quantity|rnk|
-------------+-----------+--------+---+
-ramen       |A          |       3|  1|
-curry       |B          |       2|  1|
-sushi       |B          |       2|  1|
-ramen       |B          |       2|  1|
-ramen       |C          |       3|  1|
 
 
 -- 6. Which item was purchased first by the customer after they became a member?
@@ -164,8 +129,6 @@ SELECT *
 FROM rnk
 WHERE rnk = 1;
 
-SELECT * FROM members;
-
 product_name|customer_id|order_date|join_date |rnk|
 ------------+-----------+----------+----------+---+
 curry       |A          |2021-01-07|2021-01-07|  1|
@@ -175,27 +138,27 @@ sushi       |B          |2021-01-11|2021-01-09|  1|
 
 -- 7. Which item was purchased just before the customer became a member?
 
-WITH rnk as(
-	SELECT m.product_name,
-		s.customer_id,
-		s.order_date,
-		mb.join_date,
-		DENSE_RANK () OVER (PARTITION BY s.customer_id ORDER BY s.order_date DESC) AS rnk
-	FROM sales s
-	JOIN menu m ON s.product_id = m.product_id
-	JOIN members mb ON s.customer_id = mb.customer_id 
-	WHERE s.order_date < mb.join_date 
+WITH rnk as
+(
+ SELECT m.product_name
+   	,s.customer_id
+   	,s.order_date
+   	,mb.join_date
+   	,DENSE_RANK () OVER (PARTITION BY s.customer_id ORDER BY s.order_date DESC) AS rnk
+ FROM sales s
+ JOIN menu m ON s.product_id = m.product_id
+   JOIN members mb ON s.customer_id = mb.customer_id 
+   WHERE s.order_date < mb.join_date 
 )
-SELECT *
+SELECT m.product_name, s.customer_id, s.order_date, mb.join_date
 FROM rnk
 WHERE rnk = 1;
 
-product_name|customer_id|order_date|join_date |rnk|
-------------+-----------+----------+----------+---+
-sushi       |A          |2021-01-01|2021-01-07|  1|
-curry       |A          |2021-01-01|2021-01-07|  1|
-sushi       |B          |2021-01-04|2021-01-09|  1|
--- A= Sushi and curry, B= sushi
+| product_name | customer_id | order_date  | join_date   |
+|:------------:|:-----------:|:----------:|:-----------:|
+|    sushi     |      A      | 2021-01-01 | 2021-01-07  |
+|    curry     |      A      | 2021-01-01 | 2021-01-07  |
+|    sushi     |      B      | 2021-01-04 | 2021-01-09  |
 
 -- 8. What is the total items and amount spent for each member before they became a member?
 
