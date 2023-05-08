@@ -63,7 +63,7 @@ WHERE rnk = 1;
 |      B     |     curry    |
 |      C     |     ramen    |
 
-  - customer A ordered both sushi and curry as their first order. The order_date column is a date data type versus a timestamp, so we don't know which one was technically ordered first
+  - customer A ordered both sushi and curry as their first order. The order_date column is a date data type versus a timestamp, so it is unknown which one was technically ordered first
   
 
 ### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
@@ -305,7 +305,7 @@ LEFT JOIN members mb ON s.customer_id = mb.customer_id;
 
 #### Rank All The Things - Recreate the Output
 - Similarly to the question above, I used a left join to return all records from the `sales` table to match with the other tables `menu` and `members`
-- I added the column 'ranking' to match the output by using a case statement and the window function rank so that each customer that is a member has a ranking of their orders based on the order date                                    
+- I added the column 'ranking' to match the output by using a case statement and the window function 'rank' so that each customer that is a member has a ranking of their orders based on the order date                                    
 ```sql
 WITH cte as(
 SELECT 
@@ -349,7 +349,14 @@ FROM cte;
 |      C      | 2021-01-07|    ramen     |  12   |   N    |         |
 
 ---
-### Insights                                    
-                                    
-
-                                
+### Summary of Insights                                    
+- Customer A has spent the most amount of money at the Diner, followed by customers B and C.
+- Customer B has visited the restaurant the most, with a total of 6 visits.
+- The menu item ordered the most was Ramen.
+- Ramen is most popular menu item for Customer’s A & C, while customer B equally likes the 3 different menu items .
+- Customer B ordered Sushi right before and after they became a member. Customer A ordered Sushi & Curry before they became a member and ordered Curry the day they became a member.
+- Customers A & B became members after ordering 2 or more items(2.5 items on average)
+- Before becoming members, Customers A & B purchased $25 and $40 worth of items, respectively.
+- Assuming the point system from Q9, Customer B has earned the most points for 2021
+- Assuming the point system from Q10, Customer A has earned the most points in the month of January
+                                  
