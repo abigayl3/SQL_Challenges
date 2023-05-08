@@ -9,7 +9,7 @@ Main Concepts covered:
 - Group by aggregates
 - Identifying and dealing with duplicate data
 - Common table expressions and subqueries 
-- Joins
 - Entity Relationship Diagrams
 - Window Functions
 - Case Statements
+- Joins
