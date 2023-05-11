@@ -12,7 +12,7 @@
 ## Case Background
 Foodie-Fi is a subscription based streaming platform all about food related content. Foodie-Fi offers monthly and annual subscriptions, giving their customers unlimited on-demand access to exclusive world-wide food videos. The creator, Danny, wants to ensure future investment and feature decisions are data driven. Thus, this case study focuses on using subscription style digital data to answer important business questions.
 
-## Understanding the Datasets
+## Understanding the Data
 <p align="center">  
 <img  src="https://github.com/abigayl3/SQL_Challenges/blob/main/Case%20Study%20%233%20Foodie-Fi/Images/Foodie_fi_ERD.png" width="500" height="200" align="center">
 </p>
