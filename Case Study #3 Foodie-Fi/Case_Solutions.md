@@ -172,7 +172,7 @@ ORDER BY plan_id;
 ### 8. How many customers have upgraded to an annual plan in 2020?
   
 ```sql
-SELECT count(DISTINCT customer_id) AS customer_count
+SELECT COUNT(DISTINCT customer_id) AS customer_count
 FROM subscriptions s 
 WHERE plan_id = 3 AND start_date <='2020-12-31';  
 ```
