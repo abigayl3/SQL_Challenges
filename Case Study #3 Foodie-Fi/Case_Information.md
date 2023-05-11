@@ -29,7 +29,7 @@ The ERD shows 2 tables available for analysis: the data table `subscriptions` an
 |      4       |    churn    |   null |
 
 - All customers start with a free-trial period then automatically continue with the pro-monthly plan unless they cancel or downgrade/upgrade to another plan during the trial period.
-- When customers cancel their plans, they have a churn plan record
+- When customers cancel their plans, they have a churn plan record.
 
 ``subscriptions``
 | customer_id	| plan_id |	start_date |
@@ -54,7 +54,12 @@ The ERD shows 2 tables available for analysis: the data table `subscriptions` an
 |19	|0	|2020-06-22|
 |19	|2	|2020-06-29|
 |19	|3	|2020-08-29|
-
+- This is just a preview. There's a total of 2650 rows.
+- The data collected starts from January 1st, 2020 to April 30th 2021.
 ---
 
 ## SQL Concepts
+- Joins
+- Aggregate functions with GROUP BY
+- Window functions
+- Common expression tables & subqueries
