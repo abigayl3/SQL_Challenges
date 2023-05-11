@@ -249,6 +249,9 @@ ORDER BY avg_days_to_upgrade;
 | 300-330 days  |        1        |         327         |
 | 330-360 days  |        1        |         346         |
  
+- Majority of customers upgrade to an annual plan within the first 30 days.
+- At around 120-150 days (3-5 months) there is a slight increase of customers making the switch. Then after this period of time, less and less customers make the switch until there is barely any upgrades occuring from 270 days and on.
+	
  ### 11. How many customers downgraded from a pro monthly to a basic monthly plan in 2020?
   
 ```sql
@@ -268,5 +271,7 @@ WHERE plan_id = 2
 **Output:**
 | downgrade_count |
 |:---------------:|
-|        0        |
+|        0         |
+
+- no customers made this downgrade	    
                   
