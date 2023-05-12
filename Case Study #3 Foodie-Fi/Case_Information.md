@@ -59,7 +59,7 @@ The ERD shows 2 tables available for analysis: the data table `subscriptions` an
 ---
 
 ## SQL Concepts
-- Joins
-- Aggregate functions with GROUP BY
+- Table Joins
+- GROUP BY Aggregates 
 - Window functions
 - Common expression tables & subqueries
