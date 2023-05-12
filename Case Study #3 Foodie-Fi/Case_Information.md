@@ -55,7 +55,7 @@ The ERD shows 2 tables available for analysis: the data table `subscriptions` an
 |19	|2	|2020-06-29|
 |19	|3	|2020-08-29|
 - This is just a preview. There's a total of 2650 rows.
-- The data collected starts from January 1st, 2020 to April 30th 2021.
+- The data collected starts from January 1st 2020 to April 30th 2021.
 ---
 
 ## SQL Concepts
