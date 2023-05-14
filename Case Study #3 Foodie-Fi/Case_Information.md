@@ -63,3 +63,7 @@ The ERD shows 2 tables available for analysis: the data table `subscriptions` an
 - GROUP BY Aggregates 
 - Window functions
 - Common expression tables & subqueries
+
+<p> 
+  <a href="https://github.com/abigayl3/SQL_Challenges/blob/main/Case%20Study%20%233%20Foodie-Fi/Case_Solutions.md"> Click here for my solutions to the case study questions</a>
+</p>
