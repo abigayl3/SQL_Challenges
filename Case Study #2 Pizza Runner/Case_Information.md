@@ -106,4 +106,3 @@ This case focuses on the following SQL concepts:
 - Table joins
 - String transformations
 - Dealing with null values
-- Regular expressions
