@@ -281,7 +281,7 @@ GROUP BY registration_week;
 
 
 -- 2. What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?
-SELECT r.runner_id,AVG(timestampdiff(MINUTE,c.order_time,r.pickup_time)) AS avg_time
+SELECT r.runner_id,AVG(TIMETSAMPDIFF(MINUTE,c.order_time,r.pickup_time)) AS avg_time
 FROM customer_orders_t c
 JOIN runner_orders_t r ON c.order_id = r.order_id
 GROUP BY r.runner_id;
@@ -337,13 +337,13 @@ JOIN runner_orders_t r ON c.order_id = r.order_id;
 
 -- 6. What was the average speed for each runner for each delivery and do you notice any trend for these values?
 WITH CTE AS(
-   SELECT runner_id,order_id, round(avg(distance/(duration/60)),1) AS speed
+   SELECT runner_id,order_id, ROUND(AVG(distance/(duration/60)),1) AS speed
 	FROM runner_orders_t
 	WHERE cancellation IS NULL
 	GROUP BY runner_id,order_id
 	ORDER BY runner_id)
 
-SELECT runner_id, avg(speed) AS avg_speed FROM CTE
+SELECT runner_id, AVG(speed) AS avg_speed FROM CTE
 GROUP BY runner_id;
 
 -- 7. What is the successful delivery percentage for each runner?
