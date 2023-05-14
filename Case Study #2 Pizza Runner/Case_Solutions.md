@@ -64,7 +64,7 @@ MODIFY COLUMN duration int;
 ### 1. How many pizzas were ordered?
 
 ```sql
-SELECT count(pizza_id) AS total
+SELECT COUNT(pizza_id) AS total
 FROM customer_orders_t;
 ```
   
@@ -75,7 +75,7 @@ FROM customer_orders_t;
 
 ### 2. How many unqiue customer orders were made?  
 ```sql
-SELECT count(DISTINCT(order_id)) AS count_orders
+SELECT COUNT(DISTINCT(order_id)) AS count_orders
 FROM customer_orders_t;  
 ```  
   
@@ -86,7 +86,7 @@ FROM customer_orders_t;
   
  ### 3. How many successful orders were delivered by each runner?  
 ```sql
-SELECT runner_id,count(order_id) AS total_successful_orders
+SELECT runner_id,COUNT(order_id) AS total_successful_orders
 FROM runner_orders_T
 WHERE cancellation IS NULL
 GROUP BY runner_id;  
@@ -101,7 +101,7 @@ GROUP BY runner_id;
   
 ### 4.  How many of each type of pizza was delivered?
 ```sql
-SELECT count(c.pizza_id) AS count, pn.pizza_name
+SELECT COUNT(c.pizza_id) AS count, pn.pizza_name
 FROM customer_orders_t c
 JOIN pizza_names pn ON c.pizza_id = pn.pizza_id
 JOIN runner_orders_t r ON c.order_id = r.order_id
@@ -117,7 +117,7 @@ GROUP BY pn.pizza_name;
  
 ### 5.  How many vegetarian and meatlovers were ordered by each customer?
 ```sql
-SELECT c.customer_id,count(c.pizza_id) AS orders, pn.pizza_name
+SELECT c.customer_id,COUNT(c.pizza_id) AS orders, pn.pizza_name
 FROM customer_orders_t c
 JOIN pizza_names pn ON c.pizza_id = pn.pizza_id
 JOIN runner_orders_t r ON c.order_id = r.order_id
@@ -155,12 +155,12 @@ FROM (
 ### 7.  For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
 ```sql
 SELECT c.customer_id,
-	sum(CASE 
+	SUM(CASE 
 		WHEN c.exclusions IS NOT NULL THEN 1
 		WHEN c.extras IS NOT NULL THEN 1
 		ELSE 0
 	  END) AS MinOneChange,
-	sum(CASE
+	SUM(CASE
 		WHEN (c.exclusions IS NULL) and
 		(c.extras IS NULL) THEN 1
 		ELSE 0
@@ -182,7 +182,7 @@ GROUP BY c.customer_id;
 
 ### 8. How many pizzas were delivered that had both exclusions and extras? 
 ```sql
-SELECT count(c.order_id) AS num_pizza
+SELECT COUNT(c.order_id) AS num_pizza
 FROM customer_orders_t c
 JOIN runner_orders_t ro ON c.order_id = ro.order_id
 WHERE ro.cancellation IS NULL AND c.exclusions IS NOT NULL and c.extras IS NOT NULL;  
@@ -196,7 +196,7 @@ WHERE ro.cancellation IS NULL AND c.exclusions IS NOT NULL and c.extras IS NOT N
 
  ### 9.  What was the total volume of pizzas ordered for each hour of the day?
 ```sql
-SELECT count(order_id) AS total_ordered, hour(order_time) AS hour_of_day
+SELECT COUNT(order_id) AS total_ordered, HOUR(order_time) AS hour_of_day
 FROM customer_orders_t
 GROUP BY hour_of_day
 ORDER BY hour_of_day;  
@@ -214,7 +214,7 @@ ORDER BY hour_of_day;
   
 ### 10.  What was the volume of orders for each day of the week?
 ```sql
-SELECT count(order_id) AS total_ordered, dayname(order_time) AS day_of_week
+SELECT COUNT(order_id) AS total_ordered, DAYNAME(order_time) AS day_of_week
 FROM customer_orders_t
 GROUP BY day_of_week
 ORDER BY total_ordered DESC;  
@@ -246,7 +246,7 @@ GROUP BY registration_week;
   
 ### 2.  What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?
 ```sql
-SELECT r.runner_id,avg(timestampdiff(MINUTE,c.order_time,r.pickup_time)) AS avg_time
+SELECT r.runner_id,AVG(TIMESTAMPDIFF(MINUTE,c.order_time,r.pickup_time)) AS avg_time
 FROM customer_orders_t c
 JOIN runner_orders_t r ON c.order_id = r.order_id
 GROUP BY r.runner_id;  
@@ -321,7 +321,7 @@ GROUP BY
   
 ### 5. What was the difference between the longest and shortest delivery times for all orders? 
 ```sql
-SELECT (max(r.duration)- min(r.duration)) AS difference
+SELECT (MAX(r.duration)- MIN(r.duration)) AS difference
 FROM customer_orders_t c
 JOIN runner_orders_t r ON c.order_id = r.order_id;  
 ```  
@@ -335,13 +335,13 @@ JOIN runner_orders_t r ON c.order_id = r.order_id;
 ### 6.  What was the average speed for each runner for each delivery and do you notice any trend for these values?
 ```sql
 WITH CTE AS(
-   SELECT runner_id,order_id, round(avg(distance/(duration/60)),1) AS speed
+   SELECT runner_id,order_id, ROUND(AVG(distance/(duration/60)),1) AS speed
 	FROM runner_orders_t
 	WHERE cancellation IS NULL
 	GROUP BY runner_id,order_id
 	ORDER BY runner_id)
 
-SELECT runner_id, avg(speed) AS avg_speed FROM CTE
+SELECT runner_id, AVG(speed) AS avg_speed FROM CTE
 GROUP BY runner_id;  
 ```  
   
@@ -368,7 +368,7 @@ GROUP BY runner_id;
 ```sql
 WITH cte as( 
 	SELECT runner_id
-	,sum(CASE WHEN cancellation IS NULL THEN 1
+	,SUM(CASE WHEN cancellation IS NULL THEN 1
 	ELSE 0
 	END) AS success, count(order_id) AS total
 	FROM runner_orders_t
