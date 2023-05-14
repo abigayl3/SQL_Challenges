@@ -106,3 +106,7 @@ This case focuses on the following SQL concepts:
 - Table joins
 - String transformations
 - Dealing with null values
+
+<p> 
+  <a href="https://github.com/abigayl3/SQL_Challenges/blob/main/Case%20Study%20%232%20Pizza%20Runner/Case_Solutions_Part_A%26B.md"> Click here for my solutions to the case study questions</a>
+</p>
